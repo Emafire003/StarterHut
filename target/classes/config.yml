@@ -1,0 +1,55 @@
+#If you wish to spawn the structure with or without air
+use_air: true
+
+#If you want to change schematic according to biome
+biome_change: true
+
+#It can be "item" if you want the player to place an item and spawn the structure
+#"firstjoin" if you want the player to be teleported and the structure to be generated (requires BetterRTP)
+#"command" if you want the player to execute /hut to be randomly teleported and the structure genereted (requires BetterRTP)
+#"all" to allow all modes.
+#"notjoin" all execept firstjoin
+mode: "item"
+
+#Set this to false if you want to disable the message like "Structure generated at" in console
+generate_structure_console_message: true
+
+#See https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html for a list of possible materials
+#If the item is invalid it will be set to be a Torch
+hutitem_type: "TORCH"
+
+#"&a" = no name. (it would be weird to have an unnamed item but still) (a can be every other color code)
+hutitem_name: "&eCapannetta"
+
+#"" = no lore (non cancellare line1,2,3)
+hutitem_lore:
+   line1: "&6Piazzami per creare una"
+   line2: "&6splendida e meravigliosa!"
+   line3: "&6capannetta"
+
+#Will the permission "starterhut.create" be remove after the structure is generated? Requires Vault
+remove_permession_after_hut_generated: true
+
+#Set this to true if you want the player to get the permission to place the hut when they get the item for it
+give_permession_with_item_give: true
+
+
+#Language section (it could be moved to lang.yml in the future)
+prefix: "&6[&eStarterHut&6]"
+structure_generation: "&eGenerando la struttura..."
+structure_generated: "&eStruttura generata!"
+no_permission: "&cErrore! Non hai il permesso!"
+rtp_not_installed: "&cErrore! Stai tentando di fare un RTP senza BetterRTP installato!"
+general_generation_error: "&cErroer! Non è stato possibile generare la struttura!"
+mode_not_enabled: "&cErrore! Questa modalità non è abilitata! Seleziona l opzione di config giusta!"
+error_running_from_console: "&cErrore! Non puoi usarla da console! Usa anzi /hut createat!"
+item_recived: "&eEcco qui la tua Capanna. Piazzale per spawnare la struttura!"
+vault_not_installed: "&cErrore! Stai provando ad aggiungrere/rimuovere un permesso senza Vault installato!"
+structure_gifted: "&6Hai ricevuto una Capannetta!"
+already_claimed_territory: "&cErrore! Non puoi piazzarla qui dato che è terreno già claimato!"
+griefprevention_not_installed: "&cError! GriefPrevention plugin not installed"
+reloading: "&6Reloading plugin..."
+reloaded: "&6Reload compleate!"
+setmode_to: "&6Setting mode to: &3"
+provide_subcommand: "&6Per favore fornisci un sottocomando. Ad esempio /hut create"
+worldguard_not_installed: "&cError! WorldGuard plugin not installed"
