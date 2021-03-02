@@ -7,11 +7,10 @@
  del plugin, con il nome secondo il legno (anche in accordo col bioma) (oak.schem spruce.schem jungle.schem birch.schem darkoak.schem acacia.schem warped.schem crimson.schem).
  
  softdepend: Vault, BetterRTP, WorldGuard, GriefPrevention
-depend: WorldEdit
-
+ depend: WorldEdit
 
 commands:
-   hut:
+hut:
       description: Used to manage hut commands, like create ad createat and item
       usage: /hut <subcommand>
 permissions:
