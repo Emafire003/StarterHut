@@ -6,13 +6,10 @@
  Per installare posizionare il plugin nella cartella /plugins/ del server ed avviare il server. Inserire poi le schematiche desiderate nella cartella /schems/
  del plugin, con il nome secondo il legno (anche in accordo col bioma) (oak.schem spruce.schem jungle.schem birch.schem darkoak.schem acacia.schem warped.schem crimson.schem).
  
- softdepend:
-   - Vault
-   - GriefPrevention
-   - BetterRTP
-   #TO DO WorldGuard
-depend:
-   - WorldEdit
+ softdepend: Vault, BetterRTP, WorldGuard, GriefPrevention
+depend: WorldEdit
+
+
 commands:
    hut:
       description: Used to manage hut commands, like create ad createat and item
