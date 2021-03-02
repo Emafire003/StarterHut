@@ -150,7 +150,7 @@ public class GenerateHut {
 		}
 		//Warped & Soul sand = warped wood
 		else if(biome.equals(Biome.WARPED_FOREST) || biome.equals(Biome.SOUL_SAND_VALLEY) ) {
-			File file = new File(Main.getMain().getDataFolder().getAbsolutePath() + "/warped.schem");		
+			File file = new File(Main.getMain().getDataFolder().getAbsolutePath() + "/schem/warped.schem");		
 			return file;
 		}
 		//nether biomes except above = crimson wood

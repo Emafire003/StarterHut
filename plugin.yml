@@ -6,7 +6,7 @@ softdepend:
    - Vault
    - GriefPrevention
    - BetterRTP
-   #TO DO WorldGuard
+   - WorldGuard
 depend:
    - WorldEdit
 commands:
