@@ -23,6 +23,7 @@ import me.SuperRonanCraft.BetterRTP.player.rtp.RTP_TYPE;
 import tk.emafire003.dev.starterhut.GenerateHut;
 import tk.emafire003.dev.starterhut.Main;
 
+//Class that "holds" the commands relative to the plugin
 public class Hut implements CommandExecutor {
 	
 	private static FileConfiguration lang = Main.getLang();
@@ -34,7 +35,7 @@ public class Hut implements CommandExecutor {
 		if(sender.hasPermission("starterhut.hut")) {
 			try {
 				if(args == null) {
-					//help section
+					//help section TODO
 					if(sender.hasPermission("starterhut.help")) {
 						sender.sendMessage("§bStarterHut made by @Emafire003 \n §aVersion:" + Main.getMain().getDescription().getVersion());
 					}else {
@@ -53,6 +54,7 @@ public class Hut implements CommandExecutor {
 				}
 				
 				//needs arg0 as create
+				//checks for the subcommand "create" and spawns the structer at the player's location
 				else if(args[0].equals("create")) {
 					if(config.getString("mode").equals("item") || config.getString("mode").equals("firstjoin")) {
 						sender.sendMessage(Main.getPrefix() + Main.color(lang.getString("mode_not_enabled")));
@@ -77,6 +79,7 @@ public class Hut implements CommandExecutor {
 				}
 				
 				//needs args0 as create, args1,2,3 as X,Y,Z, args4 as player name, args5 World (if sender is not Entity)
+				//same as before but takes coords & wolrd & stuff
 				else if(args[0].equals("createat")){
 					if(config.getString("mode").equals("item") || config.getString("mode").equals("firstjoin")) {
 						sender.sendMessage(Main.getPrefix() + Main.color(lang.getString("mode_not_enabled")));
@@ -124,6 +127,7 @@ public class Hut implements CommandExecutor {
 					}
 					
 				//needs args0 as getmode
+				//sends a message with the mode setted in the config to the plaeyr
 				}else if(args[0].equals("getmode")) {
 					if(sender.hasPermission("starterhut.getmode")) {
 						sender.sendMessage(Main.getPrefix() + config.getString("mode"));
@@ -131,6 +135,7 @@ public class Hut implements CommandExecutor {
 						sender.sendMessage(Main.getPrefix() + Main.color(lang.getString("no_permission")));
 					}
 				//need args0 as setmode && args1 as the mode to set
+				//allows to set the mode from within the game
 				}else if(args[0].equals("setmode")) {
 					if(sender.hasPermission("starterhut.setmode")) {
 						config.set("mode", args[1]);
@@ -163,6 +168,11 @@ public class Hut implements CommandExecutor {
 		return true;
 	}
 	
+	/**
+	 * This method is used to get the ItemStack of the HutItem
+	 * It takes name, and theree lines of lore from the config
+	 * and adds the persitant key "StarterHut-hutitem" to it
+	 * then returns the ItemStack*/
 	public static ItemStack getHutItem() {
 		ItemStack item = new ItemStack(Material.getMaterial(config.getString("hutitem_type")));
 		ItemMeta meta = item.getItemMeta();
@@ -179,10 +189,17 @@ public class Hut implements CommandExecutor {
 		
 	}
 	
+	/**
+	 * This method returns the NamespacedKey of the HutItem*/
 	public static NamespacedKey getKey() {
 		return key;
 	}
 	
+	/**
+	 * This method will use BetterRTP library to teleport
+	 * a player to a random location
+	 * 
+	 * @param player The player who will get RTPed*/
 	public static void rtpPlayer(Player player) {
 		//checks if the mode is item. If it's not, RTPs a player
 		if(Main.getBetterRTP()) {

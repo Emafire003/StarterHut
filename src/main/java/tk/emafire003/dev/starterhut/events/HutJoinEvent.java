@@ -13,8 +13,6 @@ import tk.emafire003.dev.starterhut.commands.Hut;
 public class HutJoinEvent implements Listener {
 	
 	private FileConfiguration config = Main.getMain().getConfig();
-	//TODO Hook with worldguard (maybe) and GriefPrevention to prevent placing and generating
-	//the structure in some regions
 	
 	/** 
 	 * If the option "firstjoin" or "all" is enabled 

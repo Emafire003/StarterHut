@@ -28,6 +28,9 @@ public class GenerateHut {
 	private FileConfiguration config = Main.getMain().getConfig();
 	private String prefix = Main.getPrefix();
 	
+	/**With this a new hut is generated at the player's location 
+	 * 
+	 * @param player The player for which the hut needs generating*/
 	public GenerateHut(final Player player) {	
 		try {
 
@@ -71,6 +74,9 @@ public class GenerateHut {
 		
 	}
 	
+	/**With this a new hut is generated at a given location
+	 * 
+	 * @param loc The location where the Hut will be generated*/
 	public GenerateHut(Location loc) {	
 		
 		try {
@@ -98,6 +104,11 @@ public class GenerateHut {
 		
 	}
 	
+	/**This method checks the biome in a specific location (usually
+	 * where the hut needs to spawn) and returns the corresponding
+	 * schemfile for the hut
+	 * 
+	 * @param loc The location that needs biomechecking*/
 	public File checkBiome(Location loc) {
 		Biome biome = loc.getWorld().getBiome(loc.getBlockX(), loc.getBlockY(), loc.getBlockZ());
 		

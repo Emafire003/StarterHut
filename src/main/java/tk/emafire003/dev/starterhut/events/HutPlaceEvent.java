@@ -24,6 +24,7 @@ import tk.emafire003.dev.starterhut.GenerateHut;
 import tk.emafire003.dev.starterhut.Main;
 import tk.emafire003.dev.starterhut.commands.Hut;
 
+//This event checks for the item placement on ground, and then uses GenerateHut() to generate the hut
 public class HutPlaceEvent implements Listener {
 	
 	private FileConfiguration lang = Main.getLang();
@@ -57,9 +58,18 @@ public class HutPlaceEvent implements Listener {
 			RegionQuery query = container.createQuery();
 			if(!query.testBuild(locA, localPlayer, Flags.BUILD)) { //TODO claimed territory -> WG
 				player.sendMessage(Main.getPrefix() + Main.color(lang.getString("already_claimed_territory")));
+				event.setCancelled(true);
+				return;
 			}
 		}else {
 			System.out.println(Main.color(lang.getString("worldguard_not_installed")));
+			player.sendMessage(Main.color(lang.getString("general_generation_error")));
+		}
+		
+		if(loc.getY() <= Main.getMain().getConfig().getInt("cant_place_under")) {
+			event.setCancelled(true);
+			player.sendMessage(Main.color(lang.getString("not_under")));
+			return;
 		}
 		
 		NamespacedKey key = Hut.getKey();

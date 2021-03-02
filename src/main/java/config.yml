@@ -33,6 +33,8 @@ remove_permession_after_hut_generated: true
 #Set this to true if you want the player to get the permission to place the hut when they get the item for it
 give_permession_with_item_give: true
 
+#Y level below which you cannnot place structures (useful for preventing bedrock breaking)
+cant_place_under: 3
 
 #Language section (it could be moved to lang.yml in the future)
 prefix: "&6[&eStarterHut&6]"
@@ -53,3 +55,4 @@ reloaded: "&6Reload compleate!"
 setmode_to: "&6Setting mode to: &3"
 provide_subcommand: "&6Per favore fornisci un sottocomando. Ad esempio /hut create"
 worldguard_not_installed: "&cError! WorldGuard plugin not installed"
+not_under: "&cErrore! Non puoi piazzare la struttura a quest'altezza"
