@@ -25,7 +25,7 @@ import com.sk89q.worldedit.world.World;
 public class GenerateHut {
 	
 	private FileConfiguration lang = Main.getLang();
-	private FileConfiguration config = Main.getMain().getConfig();
+	private FileConfiguration config = Main.getConf();
 	private String prefix = Main.getPrefix();
 	
 	/**With this a new hut is generated at the player's location 
@@ -51,7 +51,7 @@ public class GenerateHut {
 			}
 			
 			//generating the schematic
-			this.pasteSchematic(file, loc, Main.getMain().getConfig().getBoolean("use_air"));
+			this.pasteSchematic(file, loc, config.getBoolean("use_air"));
 			player.setBedSpawnLocation(loc);
 		
 			if(config.getBoolean("generate_structure_console_message")) {
@@ -80,21 +80,21 @@ public class GenerateHut {
 	public GenerateHut(Location loc) {	
 		
 		try {
-			if(Main.getMain().getConfig().getBoolean("generate_structure_console_message")) {
+			if(config.getBoolean("generate_structure_console_message")) {
 				System.out.println(prefix + Main.color(lang.getString("structure_generation"))
 				+ " " + loc.getX() + " " + loc.getY() + " " + loc.getZ());
 			}
 			
 			
 			File file;
-			if(Main.getMain().getConfig().getBoolean("biome_change")) {
+			if(config.getBoolean("biome_change")) {
 				file = this.checkBiome(loc);
 			}else {
 				file = new File(Main.getMain().getDataFolder().getAbsolutePath() + "/schem/oak.schem");
 			}
-			this.pasteSchematic(file, loc, Main.getMain().getConfig().getBoolean("use_air"));
+			this.pasteSchematic(file, loc, config.getBoolean("use_air"));
 		
-			if(Main.getMain().getConfig().getBoolean("generate_structure_console_message")) {
+			if(config.getBoolean("generate_structure_console_message")) {
 				System.out.println(prefix + Main.color(lang.getString("structure_generated")));
 			}
 		}catch(Exception e) {

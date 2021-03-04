@@ -29,6 +29,9 @@ public class Main extends JavaPlugin {
 		System.out.println("[StarterHut] Enabling StarterHut plugin... *Made by @Emafire003* ");
 		main = this;
 		
+		this.saveDefaultConfig();
+		this.getConfig();
+		
 		/*File langfile = new File(this.getDataFolder().getAbsolutePath() + "/lang.yml");
 		langFile = YamlConfiguration.loadConfiguration(langfile);*/
 		
@@ -91,8 +94,6 @@ public class Main extends JavaPlugin {
 			getServer().getPluginManager().disablePlugin(this);
 			return;
 		}
-		this.saveDefaultConfig();
-		this.getConfig();
 		
 		//createLangConfig();		
 		createSchemFolder();
@@ -163,7 +164,11 @@ public class Main extends JavaPlugin {
 	
 	//Simply didn't want to spend all my time fixing the lang file not working for now
 	public static FileConfiguration getLang() {
-		return Main.getMain().getConfig();
+		return config;
+	}
+	
+	public static FileConfiguration getConf() {
+			return config;
 	}
 	
 	public static String color(String text) {

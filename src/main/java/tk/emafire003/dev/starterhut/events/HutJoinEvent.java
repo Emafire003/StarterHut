@@ -12,7 +12,7 @@ import tk.emafire003.dev.starterhut.commands.Hut;
 
 public class HutJoinEvent implements Listener {
 	
-	private FileConfiguration config = Main.getMain().getConfig();
+	private FileConfiguration config = Main.getConf();
 	
 	/** 
 	 * If the option "firstjoin" or "all" is enabled 

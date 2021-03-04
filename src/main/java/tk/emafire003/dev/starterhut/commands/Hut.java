@@ -27,7 +27,7 @@ import tk.emafire003.dev.starterhut.Main;
 public class Hut implements CommandExecutor {
 	
 	private static FileConfiguration lang = Main.getLang();
-	private static FileConfiguration config = Main.getMain().getConfig();
+	private static FileConfiguration config = Main.getConf();
 	private static NamespacedKey key = new NamespacedKey(Main.getMain(), "StarterHut-hutitem");
 
 	@Override
