@@ -1,6 +1,6 @@
 name: StarterHut
 main: tk.emafire003.dev.starterhut.Main
-version: 0.1.2
+version: 0.1.3
 author: Emafire003
 softdepend:
    - Vault

@@ -34,9 +34,8 @@ public class Main extends JavaPlugin {
 		
 		/*File langfile = new File(this.getDataFolder().getAbsolutePath() + "/lang.yml");
 		langFile = YamlConfiguration.loadConfiguration(langfile);*/
-		
 		this.getCommand("hut").setExecutor(new Hut());
-		config = Main.getMain().getConfig();
+		config = Hut.getConfig();
 		
 		if(config.getString("mode").equals("item") || config.getString("mode").equals("all") || config.getString("mode").equals("notjoin")) {
 			getServer().getPluginManager().registerEvents(new HutPlaceEvent(), this);
@@ -164,11 +163,7 @@ public class Main extends JavaPlugin {
 	
 	//Simply didn't want to spend all my time fixing the lang file not working for now
 	public static FileConfiguration getLang() {
-		return config;
-	}
-	
-	public static FileConfiguration getConf() {
-			return config;
+		return Hut.getConfig();
 	}
 	
 	public static String color(String text) {

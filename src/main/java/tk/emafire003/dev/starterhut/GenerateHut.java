@@ -21,11 +21,13 @@ import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.session.ClipboardHolder;
 import com.sk89q.worldedit.world.World;
 
+import tk.emafire003.dev.starterhut.commands.Hut;
+
 
 public class GenerateHut {
 	
 	private FileConfiguration lang = Main.getLang();
-	private FileConfiguration config = Main.getConf();
+	private FileConfiguration config = Hut.getConfig();
 	private String prefix = Main.getPrefix();
 	
 	/**With this a new hut is generated at the player's location 

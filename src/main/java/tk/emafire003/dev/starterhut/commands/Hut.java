@@ -26,24 +26,24 @@ import tk.emafire003.dev.starterhut.Main;
 //Class that "holds" the commands relative to the plugin
 public class Hut implements CommandExecutor {
 	
-	private static FileConfiguration lang = Main.getLang();
-	private static FileConfiguration config = Main.getConf();
+	private static FileConfiguration config = Main.getMain().getConfig();
+	private static FileConfiguration lang = config;
 	private static NamespacedKey key = new NamespacedKey(Main.getMain(), "StarterHut-hutitem");
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command arg1, String arg2, String[] args) {
 		if(sender.hasPermission("starterhut.hut")) {
 			try {
-				if(args == null) {
-					//help section TODO
+				if(args == null || args[0] == null) {
 					if(sender.hasPermission("starterhut.help")) {
 						sender.sendMessage("§bStarterHut made by @Emafire003 \n §aVersion:" + Main.getMain().getDescription().getVersion());
 					}else {
-						sender.sendMessage(Main.getPrefix() + Main.color(lang.getString("provide_subcommand")));
+						sender.sendMessage(Main.getPrefix() + Main.color(lang.getString("no_permission")));
 					}
 					
 					return true;
-				}else if(args[0].equals("help")) {
+				}
+				if(args[0].equals("help")) {
 					if(sender.hasPermission("starterhut.help")) {
 						sender.sendMessage("§bStarterHut made by @Emafire003 \n §aVersion:" + Main.getMain().getDescription().getVersion());
 					}else {
@@ -123,6 +123,15 @@ public class Hut implements CommandExecutor {
 					if(player.hasPermission("starterhut.item")) {
 						ItemStack item = Hut.getHutItem();
 						player.getInventory().addItem(item);
+						if(Main.getPrefix() == null) {
+							System.out.println("Main null");
+						}
+						if(lang == null) {
+							System.out.println("lang null");
+						}
+						if(lang.getString("item_recived") == null) {
+							System.out.println("string null");
+						}
 						sender.sendMessage(Main.getPrefix() + Main.color(lang.getString("item_recived")));
 					}
 					
@@ -160,7 +169,15 @@ public class Hut implements CommandExecutor {
 				
 				
 			}catch(Exception e) {
-				e.printStackTrace();
+				//e.printStackTrace();
+				//help section TODO
+				if(sender.hasPermission("starterhut.help")) {
+					sender.sendMessage("§bStarterHut made by @Emafire003 \n §aVersion:" + Main.getMain().getDescription().getVersion());
+				}else {
+					sender.sendMessage(Main.getPrefix() + Main.color(lang.getString("provide_subcommand")));
+				}
+				
+				return true;
 			}
 		}else {
 			sender.sendMessage(Main.getPrefix() + Main.color(lang.getString("no_permission")));
@@ -208,6 +225,11 @@ public class Hut implements CommandExecutor {
 			player.sendMessage(Main.color(lang.getString("general_generation_error")));
 			System.out.println(Main.color(lang.getString("rtp_not_installed")));
 		}
+	}
+	
+	//pretty self explanatory
+	public static FileConfiguration getConfig() {
+		return config;
 	}
 
 }

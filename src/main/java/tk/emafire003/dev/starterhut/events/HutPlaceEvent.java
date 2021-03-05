@@ -66,7 +66,7 @@ public class HutPlaceEvent implements Listener {
 			player.sendMessage(Main.color(lang.getString("general_generation_error")));
 		}
 		
-		if(loc.getY() <= Main.getConf().getInt("cant_place_under")) {
+		if(loc.getY() <= Hut.getConfig().getInt("cant_place_under")) {
 			event.setCancelled(true);
 			player.sendMessage(Main.color(lang.getString("not_under")));
 			return;

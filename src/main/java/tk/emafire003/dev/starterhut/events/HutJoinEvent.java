@@ -7,12 +7,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import tk.emafire003.dev.starterhut.GenerateHut;
-import tk.emafire003.dev.starterhut.Main;
 import tk.emafire003.dev.starterhut.commands.Hut;
 
 public class HutJoinEvent implements Listener {
 	
-	private FileConfiguration config = Main.getConf();
+	private FileConfiguration config = Hut.getConfig();
 	
 	/** 
 	 * If the option "firstjoin" or "all" is enabled 
