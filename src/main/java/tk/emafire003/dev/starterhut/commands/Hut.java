@@ -36,20 +36,20 @@ public class Hut implements CommandExecutor {
 			try {
 				if(args == null || args[0] == null) {
 					if(sender.hasPermission("starterhut.help")) {
-						sender.sendMessage("§bStarterHut made by @Emafire003 \n §aVersion:" + Main.getMain().getDescription().getVersion());
+						sender.sendMessage("§bStarterHut made by @Emafire003 \n§aVersion: " + Main.getMain().getDescription().getVersion());
+						help(sender);
 					}else {
 						sender.sendMessage(Main.getPrefix() + Main.color(lang.getString("no_permission")));
 					}
-					
 					return true;
 				}
 				if(args[0].equals("help")) {
 					if(sender.hasPermission("starterhut.help")) {
-						sender.sendMessage("§bStarterHut made by @Emafire003 \n §aVersion:" + Main.getMain().getDescription().getVersion());
+						sender.sendMessage("§bStarterHut made by @Emafire003 \n§aVersion: " + Main.getMain().getDescription().getVersion());
+						help(sender);
 					}else {
 						sender.sendMessage(Main.getPrefix() + Main.color(lang.getString("no_permission")));
-					}
-					
+					}	
 					return true;
 				}
 				
@@ -170,9 +170,9 @@ public class Hut implements CommandExecutor {
 				
 			}catch(Exception e) {
 				//e.printStackTrace();
-				//help section TODO
 				if(sender.hasPermission("starterhut.help")) {
-					sender.sendMessage("§bStarterHut made by @Emafire003 \n §aVersion:" + Main.getMain().getDescription().getVersion());
+					sender.sendMessage("§bStarterHut made by @Emafire003 \n§aVersion: " + Main.getMain().getDescription().getVersion());
+					help(sender);
 				}else {
 					sender.sendMessage(Main.getPrefix() + Main.color(lang.getString("provide_subcommand")));
 				}
@@ -207,7 +207,8 @@ public class Hut implements CommandExecutor {
 	}
 	
 	/**
-	 * This method returns the NamespacedKey of the HutItem*/
+	 * This method returns the NamespacedKey of the HutItem
+	 * */
 	public static NamespacedKey getKey() {
 		return key;
 	}
@@ -230,6 +231,26 @@ public class Hut implements CommandExecutor {
 	//pretty self explanatory
 	public static FileConfiguration getConfig() {
 		return config;
+	}
+	
+	/**
+	 * This method sends a bunch of messages to a CommandSender
+	 * that executed the commands to get the help section
+	 * (currently either just typed /hut, /hut help or if
+	 * there was an error in the command typing)
+	 * 
+	 * The messages explain the various commands of the plugins
+	 * 
+	 * @param sender The command sender who executed the help command*/
+	public static void help(CommandSender sender) {
+		sender.sendMessage(Main.getPrefix() + Main.color(lang.getString("help_line1")));
+		sender.sendMessage(Main.getPrefix() + Main.color(lang.getString("help_line2")));
+		sender.sendMessage(Main.getPrefix() + Main.color(lang.getString("help_line3")));
+		sender.sendMessage(Main.getPrefix() + Main.color(lang.getString("help_line4")));
+		sender.sendMessage(Main.getPrefix() + Main.color(lang.getString("help_line5")));
+		sender.sendMessage(Main.getPrefix() + Main.color(lang.getString("help_line6")));
+		sender.sendMessage(Main.getPrefix() + Main.color(lang.getString("help_line7")));
+		sender.sendMessage(Main.getPrefix() + Main.color(lang.getString("help_line8")));
 	}
 
 }
