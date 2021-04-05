@@ -6,7 +6,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import tk.emafire003.dev.starterhut.GenerateHut;
 import tk.emafire003.dev.starterhut.commands.Hut;
 
 public class HutJoinEvent implements Listener {
@@ -33,7 +32,6 @@ public class HutJoinEvent implements Listener {
 		Player player = event.getPlayer();
 		if(!player.hasPlayedBefore()) {
 			Hut.rtpPlayer(player);
-			new GenerateHut(player);
 		}
 	}
 

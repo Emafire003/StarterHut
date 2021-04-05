@@ -16,6 +16,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.persistence.PersistentDataType;
 
 import me.SuperRonanCraft.BetterRTP.BetterRTP;
@@ -29,6 +30,7 @@ public class Hut implements CommandExecutor {
 	private static FileConfiguration config = Main.getMain().getConfig();
 	private static FileConfiguration lang = config;
 	private static NamespacedKey key = new NamespacedKey(Main.getMain(), "StarterHut-hutitem");
+	private static FixedMetadataValue metadata = new FixedMetadataValue(Main.getMain(), true);
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command arg1, String arg2, String[] args) {
@@ -61,13 +63,9 @@ public class Hut implements CommandExecutor {
 						return true;
 					}
 					if(sender instanceof Player && sender.hasPermission("starterhut.create")) {
-						Player player = (Player) sender;
-						player.sendMessage(Main.getPrefix() + Main.color("structure_generation"));
-						
+						final Player player = (Player) sender;
 						rtpPlayer(player);
-						new GenerateHut(player);
-						
-						player.sendMessage(Main.getPrefix() + Main.color( "structure_generated"));
+						//And then just waits for the event
 					}else {
 						if(!(sender instanceof Player)) {
 							
@@ -93,12 +91,12 @@ public class Hut implements CommandExecutor {
 							world = Bukkit.getWorld(args[5]);
 						}					
 						Location loc = new Location(world, Double.valueOf(args[1]), Double.valueOf(args[2]), Double.valueOf(args[3]));
-						sender.sendMessage(Main.getPrefix() + Main.color("structure_generation"));
+						sender.sendMessage(Main.getPrefix() + Main.color(lang.getString("structure_generation")));
 						new GenerateHut(loc);
 						Player player = Bukkit.getPlayer(args[4]);
 						player.teleport(loc);
-						player.sendMessage(Main.getPrefix() + Main.color("structure_gifted"));
-						sender.sendMessage(Main.getPrefix() + Main.color("structure_generated"));
+						player.sendMessage(Main.getPrefix() + Main.color(lang.getString("structure_gifted")));
+
 					}else {
 						sender.sendMessage(Main.getPrefix() + Main.color(lang.getString("no_permission")));
 					}
@@ -108,14 +106,6 @@ public class Hut implements CommandExecutor {
 				//it gives the HutItem to the player
 				else if(args[0].equals("item")) {
 					if(config.getString("mode").equals("firstjoin") || config.getString("mode").equals("command")) {
-						if(Main.getPrefix() == null) {
-							Bukkit.broadcastMessage("prefix null");
-						}
-						else if(lang == null) {
-							Bukkit.broadcastMessage("comfig null");
-						}else if(config.getString("mode_not_enabled") == null){
-							Bukkit.broadcastMessage("get string null");
-						}
 						sender.sendMessage(Main.getPrefix() + Main.color(lang.getString("mode_not_enabled")));
 						return true;
 					}
@@ -123,15 +113,6 @@ public class Hut implements CommandExecutor {
 					if(player.hasPermission("starterhut.item")) {
 						ItemStack item = Hut.getHutItem();
 						player.getInventory().addItem(item);
-						if(Main.getPrefix() == null) {
-							System.out.println("Main null");
-						}
-						if(lang == null) {
-							System.out.println("lang null");
-						}
-						if(lang.getString("item_recived") == null) {
-							System.out.println("string null");
-						}
 						sender.sendMessage(Main.getPrefix() + Main.color(lang.getString("item_recived")));
 					}
 					
@@ -149,6 +130,7 @@ public class Hut implements CommandExecutor {
 					if(sender.hasPermission("starterhut.setmode")) {
 						config.set("mode", args[1]);
 						sender.sendMessage(Main.getPrefix() + Main.color(config.getString("setmode_to")) + args[1]);
+						sender.sendMessage(Main.getPrefix() + Main.color(config.getString("setmode_to_warning")));
 					}else {
 						sender.sendMessage(Main.getPrefix() + Main.color(lang.getString("no_permission")));
 					}
@@ -159,6 +141,7 @@ public class Hut implements CommandExecutor {
 					try{
 						sender.sendMessage(Main.getPrefix() + Main.color(config.getString("reloading")));
 						Main.getMain().reloadConfig();
+						Main.getMain().saveConfig();
 						sender.sendMessage(Main.getPrefix() + Main.color(config.getString("reloaded")));
 					}catch(Exception e) {
 						sender.sendMessage(Main.getPrefix() + "§cCould not reload the plugin!");
@@ -218,9 +201,10 @@ public class Hut implements CommandExecutor {
 	 * a player to a random location
 	 * 
 	 * @param player The player who will get RTPed*/
-	public static void rtpPlayer(Player player) {
-		//checks if the mode is item. If it's not, RTPs a player
+	public static void rtpPlayer(final Player player) {
+		
 		if(Main.getBetterRTP()) {
+			player.setMetadata("StarterHut-rtping", metadata);
 			BetterRTP.getInstance().getRTP().start(player, player, player.getWorld().getName(), null, false, RTP_TYPE.ADDON);
 		}else {
 			player.sendMessage(Main.color(lang.getString("general_generation_error")));
@@ -231,6 +215,10 @@ public class Hut implements CommandExecutor {
 	//pretty self explanatory
 	public static FileConfiguration getConfig() {
 		return config;
+	}
+	
+	public static FixedMetadataValue getMetadataKey() {
+		return metadata;
 	}
 	
 	/**

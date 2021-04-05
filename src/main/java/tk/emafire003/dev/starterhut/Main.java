@@ -11,7 +11,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 import net.md_5.bungee.api.ChatColor;
 import net.milkbowl.vault.permission.Permission;
 import tk.emafire003.dev.starterhut.commands.Hut;
+import tk.emafire003.dev.starterhut.events.HutJoinEvent;
 import tk.emafire003.dev.starterhut.events.HutPlaceEvent;
+import tk.emafire003.dev.starterhut.events.RTPWentWellEvent;
 
 public class Main extends JavaPlugin {
 
@@ -44,6 +46,11 @@ public class Main extends JavaPlugin {
 			System.out.println("[StarterHut]  HutPlaceEvent not registered");
 		}
 		
+		if(config.getString("mode").equals("firstjoin") || config.getString("mode").equals("all")) {
+			getServer().getPluginManager().registerEvents(new HutJoinEvent(), this);
+			System.out.println("[StarterHut] Registering HutJoinEvent");
+		}
+		
 		try {
 			if ( !setupPermissions() ) {
 				System.out.println("[StarterHut] WARNING!!! No Vault dependecy found, can't interact with permissions!");
@@ -72,6 +79,10 @@ public class Main extends JavaPlugin {
 	            betterRTP = false;
 			}else {
 				System.out.println("[StarterHut] Hooking in BetterRTP!");
+				if(!config.getString("mode").equals("item")) {
+					getServer().getPluginManager().registerEvents(new RTPWentWellEvent(), this);
+					System.out.println("[StarterHut] Registering RTPWentWellEvent");
+				}
 			}
             
             if (worldGuardPlugin == null) {
